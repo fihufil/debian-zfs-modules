@@ -1,0 +1,5 @@
+zfs-modules-dkms (1.0-1~0rapidrage0) stable; urgency=low
+
+  * Initial release.
+
+ -- Filip Dorosz <filip.dorosz@rapidrage.org>  Mon, 22 Jul 2024 10:00:00 +0000

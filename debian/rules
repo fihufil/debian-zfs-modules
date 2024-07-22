@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+
+ifeq ($(strip $(DKMS_KERNEL_VERSION)),)
+$(error Environment variable DKMS_KERNEL_VERSION is not set)
+endif
+
+ifeq ($(strip $(DKMS_ZFS_VERSION)),)
+$(error Environment variable DKMS_ZFS_VERSION is not set)
+endif
+
+ZFS_VERSION := ${DKMS_ZFS_VERSION}
+KVERSION := ${DKMS_KERNEL_VERSION}
+VERSION := $(patsubst %-amd64,%,$(KVERSION))
+
+DIR := ${CURDIR}
+
+%:
+	dh $@
+	
+override_dh_gencontrol:
+	dh_gencontrol -- -v$(VERSION) -Vkernel-version=$(KVERSION)
+
+override_dh_auto_clean:
+	rm -rf debian/zfs-modules*
+	rm -rf dkms_binaries_only dkms_main_tree
+	rm -f $(DIR)/zfs-$(ZFS_VERSION)-$(KVERSION).tar.gz
+
+override_dh_auto_test:
+override_dh_auto_build:
+override_dh_auto_install:
+	dkms mktarball --binaries-only -k $(KVERSION) zfs/$(ZFS_VERSION) --archive $(DIR)/zfs-$(ZFS_VERSION)-$(KVERSION).tar.gz
+	tar -xvf $(DIR)/zfs-$(ZFS_VERSION)-$(KVERSION).tar.gz
+	mkdir -p debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zcommon.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zunicode.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/znvpair.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zlua.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/spl.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zfs.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zavl.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/zzstd.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+	cp dkms_main_tree/$(KVERSION)/x86_64/module/icp.ko debian/zfs-modules-$(KVERSION)-unsigned/lib/modules/$(KVERSION)/kernel/zfs/
+
+override_dh_installmodules:
+	dh_installmodules

@@ -1,0 +1,9 @@
+zcommon.ko 
+zunicode.ko
+znvpair.ko
+zlua.ko
+spl.ko
+zfs.ko
+zavl.ko
+zzstd.ko
+icp.ko
