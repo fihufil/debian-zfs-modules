@@ -17,7 +17,7 @@ control:
 	sed 's/KERNEL_VERSION/$(KVERSION)/g' debian/control.in > debian/control
 
 package:
-	dpkg-buildpackage -us -uc
+	dpkg-buildpackage --build=binary -uc
 
 clean:
 	debian/rules clean
