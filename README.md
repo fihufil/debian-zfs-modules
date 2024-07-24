@@ -14,7 +14,7 @@ export DKMS_ZFS_VERSION="2.1.11"
 
 Then you have to create control file and create a package:
 ```
-make control
+make
 ```
 
 # Cleanup
