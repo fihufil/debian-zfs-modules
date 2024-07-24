@@ -1,9 +1,15 @@
 Debian ZFS modules source package
 ======
 
-This is very simple ZFS modules package for Debian which uses `dkms mktarball --binaries-only` underneath.
+As `dkms mkbmdeb` was deprecated upstream I created this very simple ZFS modules package for Debian 12 which uses `dkms mktarball --binaries-only` underneath.
 
 ## Building
+
+As this package uses dkms you have to have `dkms-zfs` installed of course:
+
+```
+apt install zfs-dkms
+```
 
 First you have to export the following environment variables:
 
@@ -16,6 +22,8 @@ Then you have to create control file and create a package:
 ```
 make
 ```
+
+It will produce package like this `zfs-modules-6.1.0-22-amd64-unsigned_6.1.0-22_amd64.deb` with binary zfs modules that you can install on a Debian 12 system without full build dependences, yay!
 
 ## Cleanup
 
