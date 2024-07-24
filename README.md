@@ -3,7 +3,7 @@ Debian ZFS modules source package
 
 This is very simple ZFS modules package for Debian which uses `dkms mktarball --binaries-only` underneath.
 
-# Building
+## Building
 
 First you have to export the following environment variables:
 
@@ -17,7 +17,7 @@ Then you have to create control file and create a package:
 make
 ```
 
-# Cleanup
+## Cleanup
 
 To cleanup you can do:
 
@@ -25,6 +25,6 @@ To cleanup you can do:
 make clean
 ```
 
-# Limitations
+## Limitations
 
 Currently this kernel modules are not signed (hence the suffix -unsigned) so these won't work if you have Secure Boot enabled.
