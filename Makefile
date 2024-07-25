@@ -23,4 +23,4 @@ clean:
 	debian/rules clean
 	rm debian/control
 
-.PHONY: control clean dpkg-buildpackage
+.PHONY: all control package clean
