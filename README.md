@@ -16,6 +16,7 @@ First you have to export the following environment variables:
 ```
 export DKMS_KERNEL_VERSION="6.1.0-23-amd64"
 export DKMS_ZFS_VERSION="2.1.11"
+export DKMS_SIGNED=0
 ```
 
 Then you have to create control file and create a package:
@@ -33,6 +34,18 @@ To cleanup you can do:
 make clean
 ```
 
-## Limitations
+## Secure Boot
 
-Currently this kernel modules are not signed (hence the suffix -unsigned) so these won't work if you have Secure Boot enabled.
+To make use of Secure Boot and ZFS packages you have to provision MOK (Machine Owner Key) into your machine.
+
+Good resource that covers this topic is on Debian Wiki: https://wiki.debian.org/SecureBoot#MOK_-_Machine_Owner_Key
+
+Then you have to setup DKMS for signing your newly build kernel modules using MOK cert as this package uses DKMS underneath.
+
+Once your DKMS build modules are signed you can enable signed binary packages with:
+
+```
+export DKMS_SIGNED=1
+```
+
+And repeating `make`
