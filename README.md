@@ -24,7 +24,7 @@ Then you have to create control file and create a package:
 make
 ```
 
-It will produce package like this `zfs-modules-6.1.0-22-amd64-unsigned_6.1.0-22_amd64.deb` with binary zfs modules that you can install on a Debian 12 system without full build dependences, yay!
+It will produce package like this `zfs-modules-6.1.0-22-amd64-unsigned_6.1.0-22_amd64.deb` (or `zfs-modules-6.1.0-22-amd64_6.1.0-22_amd64.deb` if you have signing setup!) with binary zfs modules that you can install on a Debian 12 system without full build dependences, yay!
 
 ## Cleanup
 
