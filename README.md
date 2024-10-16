@@ -42,7 +42,7 @@ A helpful resource on this topic can be found on the Debian Wiki: https://wiki.d
 
 Next, you need to set up DKMS to sign your newly built kernel modules using the MOK certificate, as we are using DKMS underneath.
 
-Once your DKMS-built modules are signed, you can proceed to create a signed binary package of the ZFS module by exporting:
+Once your DKMS-built modules are signed, you can proceed to create a binary package of the signed ZFS module by exporting:
 
 ```
 export DKMS_SIGNED=1
