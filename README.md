@@ -36,13 +36,13 @@ make clean
 
 ## Secure Boot
 
-To make use of Secure Boot and ZFS packages you have to provision MOK (Machine Owner Key) into your machine.
+To use Secure Boot with ZFS packages, you need to enroll a Machine Owner Key (MOK) into your system.
 
-Good resource that covers this topic is on Debian Wiki: https://wiki.debian.org/SecureBoot#MOK_-_Machine_Owner_Key
+A helpful resource on this topic can be found on the Debian Wiki: https://wiki.debian.org/SecureBoot#MOK_-_Machine_Owner_Key
 
-Then you have to setup DKMS for signing your newly build kernel modules using MOK cert as this package uses DKMS underneath.
+Next, you need to set up DKMS to sign your newly built kernel modules using the MOK certificate, as we are using DKMS underneath.
 
-Once your DKMS build modules are signed you can enable signed binary packages with:
+Once your DKMS-built modules are signed, you can proceed to create a signed binary package of the ZFS module by exporting:
 
 ```
 export DKMS_SIGNED=1
